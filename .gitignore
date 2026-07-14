@@ -1,0 +1,26 @@
+# Ignore everything by default
+*
+
+# Allow the .gitignore itself
+!.gitignore
+
+# Allow the HTML assets
+!index.html
+!leaf-business-dossier.html
+
+# Allow logo and backgrounds
+!leaf-logo.png
+!herobg.png
+!whyleaf.png
+
+# Allow product images
+!product-areca.png
+!product-sal.png
+!product-sugarcane.png
+!product-bamboo.png
+
+# Allow guide images
+!guide-areca.png
+!guide-sal.png
+!guide-sugarcane.png
+!guide-bamboo.png

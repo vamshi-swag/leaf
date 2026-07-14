@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaf. — Leafware Business Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4332;
+  --forest-deep:#12291F;
+  --sage:#95B8A2;
+  --leaf:#52B788;
+  --cream:#F7F3E9;
+  --paper:#FDFBF5;
+  --tan:#C98A5E;
+  --earth:#7E3322;
+  --ink:#22301F;
+  --ink-soft:#4A5A48;
+  --line:#DCD4C2;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(27,67,50,.08);
+  --font-display:"Averia Serif Libre", "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:"Karla", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(149,184,162,.16), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(201,138,94,.10), transparent 60%),
+    var(--cream);
+  line-height:1.6;
+  font-size:16.5px;
+}
+::selection{background:var(--leaf);color:#fff}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(247,243,233,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin:0;
+  border-radius:0;
+}
+.nav-inner{
+  width:100%;max-width:none;padding:12px 30px;
+  display:flex;align-items:center;gap:18px;
+  transition:all .3s ease;
+}
+.nav.scrolled{
+  top:14px;
+  left:20px;
+  right:20px;
+  width:calc(100% - 40px);
+  max-width:1400px;
+  margin:0 auto;
+  border:1px solid var(--line);
+  border-radius:999px;
+  box-shadow:0 12px 34px rgba(27,67,50,.12);
+  background:rgba(247,243,233,.94);
+}
+.nav.scrolled .nav-inner{
+  padding:10px 24px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:var(--forest);text-decoration:none;white-space:nowrap}
+.brand img{width:36px;height:36px;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 1px 4px rgba(27,67,50,.18))}
+.nav-links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  color:var(--ink-soft);text-decoration:none;font-size:.86rem;font-weight:500;
+  padding:7px 11px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s;
+}
+.nav-links a:hover,.nav-links a:focus-visible{background:var(--forest);color:var(--cream);outline:none}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  min-height:92vh;
+  background-image:
+    linear-gradient(105deg,
+      rgba(10,25,16,.88) 0%,
+      rgba(14,35,22,.78) 35%,
+      rgba(18,41,31,.55) 58%,
+      rgba(10,20,14,.15) 80%,
+      transparent 100%),
+    url('herobg.png');
+  background-size:cover;
+  background-position:center right;
+  background-repeat:no-repeat;
+  image-rendering:crisp-edges;
+  -webkit-backface-visibility:hidden;
+  color:var(--cream);
+  padding:160px 22px 120px;
+  display:flex;
+  align-items:center;
+}
+.hero-inner{max-width:1160px;margin:0 auto;position:relative;z-index:2;width:100%}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  color:#8ee8b8;border:1px solid rgba(142,232,184,.35);
+  background:rgba(82,183,136,.12);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  padding:7px 16px;border-radius:999px;margin-bottom:30px;
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(2.8rem,5.8vw,5rem);line-height:1.04;
+  max-width:13ch;margin-bottom:26px;letter-spacing:-.02em;
+  text-shadow:0 2px 32px rgba(0,0,0,.35);
+}
+.hero h1 em{font-style:italic;color:#6ee8a8;}
+.hero p.lede{
+  max-width:52ch;font-size:1.1rem;line-height:1.68;
+  color:rgba(230,245,235,.88);margin-bottom:34px;
+  text-shadow:0 1px 12px rgba(0,0,0,.25);
+}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  background:rgba(18,41,31,.55);border:1px solid rgba(142,232,184,.3);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:9px 18px;border-radius:999px;font-size:.84rem;font-weight:600;color:rgba(230,248,238,.92);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:background .2s,border-color .2s;
+}
+.chip:hover{background:rgba(82,183,136,.28);border-color:rgba(142,232,184,.6);}
+.chip svg{width:14px;height:14px}
+.hero-frond{position:absolute;right:-60px;bottom:-80px;width:520px;opacity:.10;z-index:1;pointer-events:none}
+.hero-note{margin-top:36px;font-size:.8rem;color:rgba(200,230,210,.5)}
+.falling-leaves{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.fleaf{position:absolute;top:-40px;opacity:.5;animation:fall linear infinite}
+@keyframes fall{
+  0%{transform:translateY(-40px) translateX(0) rotate(0deg)}
+  25%{transform:translateY(28vh) translateX(24px) rotate(80deg)}
+  50%{transform:translateY(55vh) translateX(-16px) rotate(160deg)}
+  75%{transform:translateY(80vh) translateX(20px) rotate(240deg)}
+  100%{transform:translateY(115vh) translateX(-8px) rotate(330deg)}
+}
+
+/* ---------- Layout & shared ---------- */
+.section{max-width:1160px;margin:0 auto;padding:84px 22px 30px}
+.eyebrow{
+  font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--earth);font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--tan);border-radius:2px}
+h2{
+  font-family:var(--font-display);font-weight:600;color:var(--forest);
+  font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.12;margin-bottom:14px;letter-spacing:-.01em;
+}
+.section > p.intro{max-width:66ch;color:var(--ink-soft);margin-bottom:36px}
+.divider{max-width:1160px;margin:40px auto 0;padding:0 22px;display:flex;justify-content:center}
+.divider svg{width:180px;opacity:.5}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Market ---------- */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:34px}
+.stat{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.stat::after{content:"";position:absolute;right:-18px;top:-18px;width:76px;height:76px;border-radius:50%;background:rgba(82,183,136,.1)}
+.stat .num{font-family:var(--font-display);font-size:2.5rem;font-weight:700;color:var(--forest);line-height:1}
+.stat .num sup{font-size:1rem;color:var(--tan);font-family:var(--font-body);font-weight:700}
+.stat .lab{font-size:.86rem;color:var(--ink-soft);margin-top:8px}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.chart-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.chart-card h3{font-family:var(--font-display);color:var(--forest);font-size:1.1rem;margin-bottom:4px}
+.chart-card .sub{font-size:.82rem;color:var(--ink-soft);margin-bottom:14px}
+.chart-card svg{width:100%;height:auto;display:block}
+.drivers{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.driver{display:flex;gap:12px;align-items:flex-start;background:rgba(149,184,162,.14);border-radius:14px;padding:16px 18px}
+.driver svg{flex:none;width:26px;height:26px;margin-top:2px}
+.driver b{color:var(--forest)}
+.driver span{display:block;font-size:.87rem;color:var(--ink-soft)}
+
+/* ---------- Products ---------- */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px}
+.pcard{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease;
+}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(27,67,50,.13)}
+.pcard .art{height:200px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);overflow:hidden;position:relative;background:white;}
+.pcard .art img{
+  width:100%;height:100%;object-fit:contain;
+  transition:transform .35s ease;
+  padding:10px;
+  mix-blend-mode:multiply;
+}
+.pcard:hover .art img{transform:scale(1.08);}
+.pcard .art.a-areca{background:linear-gradient(160deg,#EDE4D3,#F7F3E9)}
+.pcard .art.a-sal{background:linear-gradient(160deg,#E4EBDD,#F3F6EC)}
+.pcard .art.a-bag{background:linear-gradient(160deg,#F0EAD6,#FAF6E8)}
+.pcard .art.a-bam{background:linear-gradient(160deg,#E0EAE2,#F0F5EF)}
+.pcard .body{padding:20px 22px 22px}
+.pcard h3{font-family:var(--font-display);color:var(--forest);font-size:1.22rem;display:flex;align-items:center;justify-content:space-between}
+.pcard h3 .price{font-family:var(--font-body);font-size:.82rem;font-weight:700;color:var(--earth);background:rgba(201,138,94,.16);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pcard .tag{font-size:.8rem;color:var(--ink-soft);margin:6px 0 10px}
+.pcard .hint{font-size:.78rem;color:var(--tan);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.pcard .details{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.pcard.open .details{max-height:560px}
+.pcard.open .hint .plus{display:none}
+.pcard .details ul{list-style:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:14px}
+.pcard .details li{display:flex;gap:9px;font-size:.88rem;margin-bottom:9px;color:var(--ink-soft)}
+.pcard .details li b{color:var(--ink)}
+.pcard .details li svg{flex:none;width:16px;height:16px;margin-top:3px}
+.badge-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.mini-badge{font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(82,183,136,.14);color:var(--forest)}
+.mini-badge.warn{background:rgba(201,138,94,.16);color:var(--earth)}
+
+/* ---------- Comparison table ---------- */
+.table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.9rem}
+thead th{
+  background:var(--forest);color:var(--cream);text-align:left;
+  padding:14px 16px;font-family:var(--font-display);font-weight:600;font-size:.98rem;
+}
+thead th:first-child{border-top-left-radius:var(--radius)}
+thead th:last-child{border-top-right-radius:var(--radius)}
+tbody th{background:rgba(149,184,162,.14);text-align:left;padding:12px 16px;color:var(--forest);font-size:.84rem;white-space:nowrap}
+tbody td{padding:12px 16px;border-top:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+tbody td.hl,thead th.hl{background:rgba(82,183,136,.14)}
+tbody td .good{color:var(--forest);font-weight:700}
+tbody td .bad{color:var(--earth);font-weight:700}
+.table-note{font-size:.8rem;color:var(--ink-soft);margin-top:12px}
+
+/* ---------- Suppliers ---------- */
+.state-block{margin-bottom:30px}
+.state-block h3{
+  font-family:var(--font-display);color:var(--forest);font-size:1.25rem;
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.state-block h3 .pin{width:20px;height:20px}
+.sup-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.sup{
+  background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--leaf);
+  border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);
+}
+.sup.tan{border-left-color:var(--tan)}
+.sup.earth{border-left-color:var(--earth)}
+.sup h4{color:var(--forest);font-size:1.02rem;font-family:var(--font-display)}
+.sup .role{font-size:.78rem;font-weight:700;color:var(--leaf);text-transform:uppercase;letter-spacing:.08em;margin:3px 0 8px}
+.sup.tan .role{color:var(--tan)}
+.sup.earth .role{color:var(--earth)}
+.sup p{font-size:.85rem;color:var(--ink-soft);margin-bottom:4px;display:flex;gap:8px}
+.sup p svg{flex:none;width:15px;height:15px;margin-top:3px;opacity:.7}
+
+/* ---------- Mind maps ---------- */
+.map-block{margin-bottom:56px}
+.map-block h3{font-family:var(--font-display);color:var(--forest);font-size:1.4rem;margin-bottom:6px}
+.map-block .map-sub{font-size:.86rem;color:var(--ink-soft);margin-bottom:18px}
+.mm-viewport{
+  overflow-x:auto;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  background-image:radial-gradient(rgba(149,184,162,.22) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+.mm-stage{position:relative;margin:0 auto}
+.mm-links{position:absolute;inset:0}
+.mm-node{position:absolute;border-radius:14px;font-size:.83rem;line-height:1.35}
+.mm-root{
+  width:180px;background:var(--forest);color:var(--cream);
+  font-family:var(--font-display);font-size:1.02rem;font-weight:600;
+  padding:16px 18px;text-align:center;border-radius:999px;
+  box-shadow:0 8px 22px rgba(27,67,50,.3);
+}
+.mm-branch{
+  width:158px;background:var(--paper);border:2px solid var(--sage);
+  padding:11px 30px 11px 14px;font-weight:700;color:var(--forest);cursor:pointer;
+  transition:transform .2s;user-select:none;
+}
+.mm-branch:hover{transform:scale(1.04)}
+.mm-tog{
+  position:absolute;right:9px;top:50%;transform:translateY(-50%);
+  width:19px;height:19px;border-radius:50%;background:var(--sage);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;
+}
+.mm-leaf{
+  width:185px;background:#fff;border:1px solid var(--line);
+  padding:9px 13px;color:var(--ink-soft);font-size:.8rem;box-shadow:0 3px 10px rgba(27,67,50,.06);
+}
+.map-hint{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--earth);background:rgba(201,138,94,.13);padding:6px 14px;border-radius:999px;margin-bottom:14px;font-weight:700}
+
+/* ---------- Compliance ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;counter-reset:step}
+.step{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;cursor:pointer;position:relative;transition:border-color .2s, transform .2s;box-shadow:var(--shadow);
+}
+.step:hover{transform:translateY(-3px)}
+.step.active{border-color:var(--leaf);border-width:2px}
+.step .s-ico{width:42px;height:42px;border-radius:12px;background:rgba(82,183,136,.14);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.step .s-ico svg{width:24px;height:24px}
+.step h4{font-family:var(--font-display);color:var(--forest);font-size:1rem;margin-bottom:4px}
+.step .s-sub{font-size:.8rem;color:var(--ink-soft)}
+.step .s-order{position:absolute;top:14px;right:16px;font-family:var(--font-display);font-size:1.3rem;color:var(--line);font-weight:700}
+.step-detail{
+  margin-top:16px;background:var(--forest);color:var(--cream);border-radius:var(--radius);
+  padding:0 26px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;
+}
+.step-detail.open{max-height:300px;padding:22px 26px}
+.step-detail h4{font-family:var(--font-display);margin-bottom:6px;color:var(--sage)}
+.step-detail p{font-size:.92rem;color:#DCE8DD}
+
+/* ---------- Pricing ---------- */
+.ladder{display:flex;flex-direction:column;gap:14px;margin-bottom:26px}
+.rung{display:grid;grid-template-columns:150px 1fr 120px;gap:14px;align-items:center}
+.rung .r-name{font-weight:700;color:var(--forest);font-size:.9rem}
+.rung .r-name small{display:block;font-weight:400;color:var(--ink-soft);font-size:.75rem}
+.rung .r-bar{height:26px;background:rgba(149,184,162,.18);border-radius:999px;position:relative}
+.rung .r-fill{position:absolute;top:0;bottom:0;border-radius:999px;min-width:34px}
+.rung .r-range{font-size:.86rem;font-weight:700;color:var(--earth);text-align:right;white-space:nowrap}
+.price-callouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.pc{
+  border-radius:14px;padding:18px 20px;font-size:.9rem;
+  background:var(--paper);border:1px dashed var(--tan);color:var(--ink-soft);
+}
+.pc b{color:var(--forest);display:block;margin-bottom:4px;font-family:var(--font-display);font-size:1rem}
+
+/* ---------- Roadmap ---------- */
+.road{position:relative;padding-left:26px}
+.road::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:3px;border-radius:3px;background:linear-gradient(var(--leaf),var(--tan),var(--earth))}
+.phase{position:relative;margin-bottom:26px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow)}
+.phase::before{content:"";position:absolute;left:-24px;top:26px;width:15px;height:15px;border-radius:50%;background:var(--cream);border:4px solid var(--leaf)}
+.phase:nth-child(2)::before{border-color:var(--sage)}
+.phase:nth-child(3)::before{border-color:var(--tan)}
+.phase:nth-child(4)::before{border-color:var(--earth)}
+.phase .ph-q{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tan)}
+.phase h4{font-family:var(--font-display);color:var(--forest);font-size:1.18rem;margin:4px 0 8px}
+.phase ul{list-style:none}
+.phase li{font-size:.89rem;color:var(--ink-soft);padding-left:20px;position:relative;margin-bottom:5px}
+.phase li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;background:var(--leaf);border-radius:50% 0 50% 50%;transform:rotate(45deg)}
+
+/* ---------- Footer ---------- */
+footer{margin-top:80px;background:var(--forest-deep);color:var(--sage);padding:44px 22px}
+.foot-inner{max-width:1160px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;font-size:.85rem}
+.foot-inner .fb{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:1.05rem;color:var(--cream)}
+.foot-inner .fb svg{width:22px;height:22px}
+
+@media (max-width:760px){
+  .charts{grid-template-columns:1fr}
+  .rung{grid-template-columns:1fr;gap:6px}
+  .rung .r-range{text-align:left}
+  .hero{padding:70px 22px 84px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .fleaf{display:none}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* ---------- v2: 3D hero canvas ---------- */
+.hero-gl{position:fixed;inset:0;width:100%;height:100vh;z-index:1;pointer-events:none}
+/* ---------- v2: field guides ---------- */
+.guide-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-bottom:20px}
+@media(min-width:768px){
+  .guide-grid{grid-template-columns:1fr 1fr}
+}
+.guide{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease;margin:0}
+.guide:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(27,67,50,.14)}
+.guide img{width:100%;display:block}
+.guide figcaption{padding:12px 18px;font-size:.82rem;color:var(--ink-soft);border-top:1px solid var(--line);font-weight:500;display:flex;justify-content:space-between;gap:10px}
+.guide figcaption .zoom{color:var(--tan);font-weight:700;white-space:nowrap}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(18,41,31,.92);display:none;align-items:center;justify-content:center;padding:28px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(1240px,96vw);max-height:92vh;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.5);background:var(--paper);padding:18px;object-fit:contain}
+/* ---------- v2: card tilt ---------- */
+.product-grid{perspective:1300px}
+.pcard{transform-style:preserve-3d;will-change:transform}
+</style>
+</head>
+<body>
+<!-- ======================= NAV ======================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img src="leaf-logo.png" alt="Leaf. Logo" width="36" height="36">
+      Leaf.
+    </a>
+    <div class="nav-links">
+      <a href="#market">Market</a>
+      <a href="#products">Products</a>
+      <a href="#guides">Guides</a>
+      <a href="#compare">Compare</a>
+      <a href="#suppliers">Suppliers</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#compliance">Compliance</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero" id="top">
+  <div class="falling-leaves" id="fallingLeaves"></div>
+  <canvas class="hero-gl" id="heroGL" aria-hidden="true"></canvas>
+  <svg class="hero-frond" viewBox="0 0 300 300" fill="none">
+    <path d="M40 280 C 90 200, 140 130, 250 40" stroke="#95B8A2" stroke-width="5" stroke-linecap="round"/>
+    <g stroke="#95B8A2" stroke-width="4" stroke-linecap="round">
+      <path d="M70 240 C 55 215, 50 195, 55 170"/><path d="M70 240 C 95 225, 112 205, 120 180"/>
+      <path d="M105 195 C 90 172, 86 150, 92 126"/><path d="M105 195 C 130 182, 148 162, 156 136"/>
+      <path d="M145 145 C 132 122, 128 100, 134 78"/><path d="M145 145 C 170 133, 188 114, 196 90"/>
+      <path d="M190 95 C 180 74, 178 54, 184 34"/><path d="M190 95 C 212 84, 228 68, 236 46"/>
+    </g>
+  </svg>
+  <div class="hero-inner">
+    <span class="kicker">🌿 Leaf. · Business Dossier · Hyderabad 2026</span>
+    <h1>Nature's plate.<br><em>Zero waste.</em><br>Infinite impact.</h1>
+    <p class="lede">Leafware born from the forests of Telangana — 100% natural areca palm, sal &amp; siali leaf tableware. No chemicals, no plastic, no compromise. We bring India's ancient leaf tradition to modern caterers, hotels, temples &amp; events.</p>
+    <div class="hero-chips">
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#6ee8a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>100% compostable in 60–90 days</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#6ee8a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Zero chemicals · Zero resins</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#6ee8a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Heat-safe up to 180°C</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#6ee8a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sourced from Telangana's leaf belts</span>
+    </div>
+    <p class="hero-note">Working brand name: <strong>Leaf.</strong> · ఆకు (aaku) · Starting as a branded distributor, scaling to manufacturer.</p>
+  </div>
+</header>
+
+<!-- ======================= MARKET ======================= -->
+<section class="section" id="market">
+  <p class="eyebrow reveal">The opportunity</p>
+  <h2 class="reveal">A market moving from plastic to plant</h2>
+  <p class="intro reveal">Bans on single-use plastics, rising eco-awareness and a boom in foodservice and events are pushing buyers toward natural serveware. Hospitality, corporate events and religious festivals increasingly prefer sustainable "green" plates — and Indian MSMEs are racing to expand capacity.</p>
+
+  <div class="stat-grid">
+    <div class="stat reveal"><div class="num">$<span data-count="6.7" data-dec="1">0</span><sup>B</sup></div><div class="lab">Global disposable tableware market projected by 2028 — up from $4.3B in 2020</div></div>
+    <div class="stat reveal"><div class="num">$<span data-count="365">0</span><sup>M</sup></div><div class="lab">India's sugarcane-bagasse tableware market by 2030 — up from $161M in 2021</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="9.5" data-dec="1">0</span><sup>%</sup></div><div class="lab">CAGR of India's bagasse tableware niche — a proxy for the whole eco-serveware wave</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="90">0</span><sup>days</sup></div><div class="lab">Time for an areca plate to fully return to the soil in compost (60–90 days)</div></div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-card reveal">
+      <h3>Global disposable tableware market</h3>
+      <div class="sub">USD billions · 2020 → 2028 projection</div>
+      <svg viewBox="0 0 440 210">
+        <defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#52B788" stop-opacity=".45"/><stop offset="1" stop-color="#52B788" stop-opacity=".03"/></linearGradient></defs>
+        <line x1="40" y1="170" x2="420" y2="170" stroke="#DCD4C2" stroke-width="1.5"/>
+        <line x1="40" y1="20" x2="40" y2="170" stroke="#DCD4C2" stroke-width="1.5"/>
+        <path d="M60 132 C 180 122, 280 78, 400 44 L400 170 L60 170 Z" fill="url(#gArea)"/>
+        <path d="M60 132 C 180 122, 280 78, 400 44" fill="none" stroke="#1B4332" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="60" cy="132" r="6" fill="#C98A5E"/><circle cx="400" cy="44" r="6" fill="#52B788"/>
+        <text x="60" y="118" font-size="14" font-weight="700" fill="#7E3322" text-anchor="middle">$4.3B</text>
+        <text x="396" y="30" font-size="14" font-weight="700" fill="#1B4332" text-anchor="middle">$6.7B</text>
+        <text x="60" y="192" font-size="12" fill="#4A5A48" text-anchor="middle">2020</text>
+        <text x="400" y="192" font-size="12" fill="#4A5A48" text-anchor="middle">2028</text>
+      </svg>
+    </div>
+    <div class="chart-card reveal">
+      <h3>India: bagasse tableware niche</h3>
+      <div class="sub">USD millions · fastest-growing plant-fibre segment</div>
+      <svg viewBox="0 0 440 210">
+        <line x1="40" y1="170" x2="420" y2="170" stroke="#DCD4C2" stroke-width="1.5"/>
+        <rect x="110" y="106" width="80" height="64" rx="8" fill="#C98A5E"/>
+        <rect x="260" y="26" width="80" height="144" rx="8" fill="#52B788"/>
+        <text x="150" y="94" font-size="14" font-weight="700" fill="#7E3322" text-anchor="middle">$161M</text>
+        <text x="300" y="14" font-size="14" font-weight="700" fill="#1B4332" text-anchor="middle">$365M</text>
+        <text x="150" y="192" font-size="12" fill="#4A5A48" text-anchor="middle">2021</text>
+        <text x="300" y="192" font-size="12" fill="#4A5A48" text-anchor="middle">2030</text>
+        <text x="380" y="60" font-size="12" font-weight="700" fill="#52B788">~9.5% CAGR</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="drivers">
+    <div class="driver reveal"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h16M4 18h10" stroke="#7E3322" stroke-width="2.4" stroke-linecap="round"/></svg><div><b>Plastic bans</b><span>Government restrictions on single-use plastic disposables are removing the cheapest competitor.</span></div></div>
+    <div class="driver reveal"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21C7 17.5 4 13.6 4 9.5 4 5.9 7 3 12 3s8 2.9 8 6.5c0 4.1-3 8-8 11.5Z" stroke="#1B4332" stroke-width="2"/></svg><div><b>Eco-aware buyers</b><span>Search volume for "areca leaf plates manufacturers" and "eco-friendly disposable plates" is growing markedly.</span></div></div>
+    <div class="driver reveal"><svg viewBox="0 0 24 24" fill="none"><path d="M3 20h18M6 20V9l6-5 6 5v11" stroke="#52B788" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Events & foodservice</b><span>Weddings, catering, offices, hotels and festivals seek sustainable supplies at scale.</span></div></div>
+    <div class="driver reveal"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M5 10l7-7 7 7" stroke="#C98A5E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>MSME expansion</b><span>Indian manufacturers are actively adding capacity in the leafware segment — good for sourcing partners.</span></div></div>
+  </div>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+
+<!-- ======================= PRODUCTS ======================= -->
+<section class="section" id="products">
+  <p class="eyebrow reveal">The range</p>
+  <h2 class="reveal">Four materials, four markets</h2>
+  <p class="intro reveal">Each raw material serves a distinct buyer and price point — from temple prasadam trays to resort dinnerware. Tap a card to open its full profile.</p>
+
+  <div class="product-grid">
+    <!-- ARECA -->
+    <article class="pcard reveal" tabindex="0">
+      <div class="art a-areca">
+        <img src="product-areca.png" alt="Areca Palm Leaf Plate" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>Areca Palm <span class="price">₹2–24 / pc</span></h3>
+        <p class="tag">Heat-pressed from naturally fallen palm sheaths — the flagship material.</p>
+        <span class="hint"><span class="plus">+ </span>Full profile</span>
+        <div class="details">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Strong, rigid & leak-proof</b> — holds hot, oily and liquid foods; soup-tested up to 4 hours.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Heat-safe to ~180°C</b> — microwave and oven friendly.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Composts in 60–90 days</b> — no bleach, wax or resin added.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Premium wood-grain finish</b> — upscale look for weddings & catering.</span></li>
+          </ul>
+          <div class="badge-row">
+            <span class="mini-badge">Weddings</span><span class="mini-badge">Catering</span><span class="mini-badge">Wholesale retail</span><span class="mini-badge warn">Moderate cost</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- SAL -->
+    <article class="pcard reveal" tabindex="0">
+      <div class="art a-sal">
+        <img src="product-sal.png" alt="Sal / Siali Leaf Plate" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>Sal / Siali Leaf <span class="price">₹1–3 / pc</span></h3>
+        <p class="tag">Hand-stitched Shorea & Siali leaves — the traditional, artisan option.</p>
+        <span class="hint"><span class="plus">+ </span>Full profile</span>
+        <div class="details">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Lightweight & flexible</b> — sewn together by rural artisans.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Fastest to compost</b> — biodegrades in roughly 45–60 days.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 16.5v.5" stroke="#C98A5E" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#C98A5E" stroke-width="2"/></svg><span><b>Leaks with liquids</b> — moderate heat resistance; best kept to dry or semi-dry food.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Rustic, cultural appeal</b> — the classic plate of temples and street food.</span></li>
+          </ul>
+          <div class="badge-row">
+            <span class="mini-badge">Temple prasadam</span><span class="mini-badge">Dry snacks</span><span class="mini-badge">Street food</span><span class="mini-badge warn">Not for soups</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- BAGASSE -->
+    <article class="pcard reveal" tabindex="0">
+      <div class="art a-bag">
+        <img src="product-sugarcane.png" alt="Sugarcane Bagasse Plate" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>Sugarcane Bagasse <span class="price">₹2–10 / pc</span></h3>
+        <p class="tag">Molded from pulped sugarcane residue — the workhorse for delivery & takeout.</p>
+        <span class="hint"><span class="plus">+ </span>Full profile</span>
+        <div class="details">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Highly grease-resistant</b> — sturdy for both hot and cold foods.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Low cost at volume</b> — ideal for fast-casual outlets and food delivery.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 16.5v.5" stroke="#C98A5E" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#C98A5E" stroke-width="2"/></svg><span><b>Needs industrial composting</b> — doesn't break down in a home heap.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 16.5v.5" stroke="#C98A5E" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#C98A5E" stroke-width="2"/></svg><span><b>Utilitarian matte look</b> — lacks the "craft" appeal of true leafware.</span></li>
+          </ul>
+          <div class="badge-row">
+            <span class="mini-badge">Delivery</span><span class="mini-badge">Takeout</span><span class="mini-badge">Fast-casual</span><span class="mini-badge warn">Industrial compost only</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- BAMBOO -->
+    <article class="pcard reveal" tabindex="0">
+      <div class="art a-bam">
+        <img src="product-bamboo.png" alt="Bamboo Fiber Plate" loading="lazy">
+      </div>
+      <div class="body">
+        <h3>Bamboo Fiber <span class="price">₹15–40 / pc</span></h3>
+        <p class="tag">Crafted from bamboo pulp & strips — the luxury tier for resorts.</p>
+        <span class="hint"><span class="plus">+ </span>Full profile</span>
+        <div class="details">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Excellent strength</b> with a genuinely premium look and feel.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Reusable for limited use</b> — strongly eco-branded.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 16.5v.5" stroke="#C98A5E" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#C98A5E" stroke-width="2"/></svg><span><b>Expensive & heavier</b> — a niche, high-end option rather than a volume seller.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#52B788" stroke-width="3" stroke-linecap="round"/></svg><span><b>Best placed</b> in upscale events, resorts and gifting.</span></li>
+          </ul>
+          <div class="badge-row">
+            <span class="mini-badge">Upscale events</span><span class="mini-badge">Resorts</span><span class="mini-badge warn">High price point</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+
+<!-- ======================= FIELD GUIDES ======================= -->
+<section class="section" id="guides">
+  <p class="eyebrow reveal">Field guides</p>
+  <h2 class="reveal">The range, illustrated</h2>
+  <p class="intro reveal">Original "Herbarium Modern" plates — each material documented like a botanical specimen: composition, process, use-case and compostability at a glance. Click any guide to view it full-size.</p>
+    <div class="guide-grid">
+    <figure class="guide reveal"><img src="guide-areca.png" alt="Field guide Nº1 — Areca palm leaf plates: shed, clean, heat-press; 100% compostable, no chemicals, microwave safe" loading="lazy"><figcaption><span>Nº1 · Areca Palm — shed → clean → press</span><span class="zoom">⤢ enlarge</span></figcaption></figure>
+    <figure class="guide reveal"><img src="guide-sal.png" alt="Field guide Nº2 — Sal and Siali stitched leaf plates: lightweight, traditional, quick compost, best for dry foods" loading="lazy"><figcaption><span>Nº2 · Sal & Siali — stitched with cotton, never plastic</span><span class="zoom">⤢ enlarge</span></figcaption></figure>
+    <figure class="guide reveal"><img src="guide-sugarcane.png" alt="Field guide Nº3 — Sugarcane bagasse plates: cane to pulp to mould to plate; grease-resistant, industrially compostable" loading="lazy"><figcaption><span>Nº3 · Bagasse — cane → pulp → mould → plate</span><span class="zoom">⤢ enlarge</span></figcaption></figure>
+    <figure class="guide reveal"><img src="guide-bamboo.png" alt="Field guide Nº4 — Bamboo fiber plates: premium look, strong structure, luxury eco-tableware" loading="lazy"><figcaption><span>Nº4 · Bamboo Fiber — the luxury tier</span><span class="zoom">⤢ enlarge</span></figcaption></figure>
+  </div>
+  <figure class="guide reveal"><img src="whyleaf.png" alt="Why leafware — zero waste returns to soil, chemical-free safe for food, supports farmers with fair trade" loading="lazy"><figcaption><span>The three claims every Leaf. product must be able to prove</span><span class="zoom">⤢ enlarge</span></figcaption></figure>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+
+<!-- ======================= COMPARE ======================= -->
+<section class="section" id="compare">
+  <p class="eyebrow reveal">Side by side</p>
+  <h2 class="reveal">Choosing the right plate for the job</h2>
+  <p class="intro reveal">Hover over a column to focus on one material. Coated paper is shown for reference — it's cheap, but typically contains plastic and isn't truly biodegradable.</p>
+  <div class="table-wrap reveal">
+    <table id="cmpTable">
+      <thead><tr>
+        <th></th><th>Areca Palm</th><th>Sal / Siali</th><th>Bagasse</th><th>Bamboo Fiber</th><th>Coated Paper</th>
+      </tr></thead>
+      <tbody>
+        <tr><th>Cost per piece</th><td>₹2–24</td><td>₹1–3</td><td>₹2–10</td><td>₹15–40</td><td>₹0.5–5</td></tr>
+        <tr><th>Holds liquids</th><td><span class="good">Yes — up to 4 hrs</span></td><td><span class="bad">Leaks</span></td><td><span class="good">Yes</span></td><td><span class="good">Yes</span></td><td>Varies</td></tr>
+        <tr><th>Heat resistance</th><td><span class="good">~180°C, microwave/oven safe</span></td><td>Moderate</td><td>Good (hot & cold)</td><td>Good</td><td>Low–moderate</td></tr>
+        <tr><th>Compost time</th><td>60–90 days</td><td><span class="good">45–60 days</span></td><td>Industrial facility needed</td><td>Slow (durable fiber)</td><td><span class="bad">Not truly biodegradable</span></td></tr>
+        <tr><th>Look & feel</th><td>Premium wood-grain</td><td>Rustic, traditional</td><td>Utilitarian matte</td><td>Luxury finish</td><td>Generic</td></tr>
+        <tr><th>Best for</th><td>Weddings, catering, retail</td><td>Temples, prasadam, street food</td><td>Delivery, takeout, fast-casual</td><td>Upscale events, resorts</td><td>Price-only buyers</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">Export-quality leaf plates fetch roughly 2× domestic prices thanks to quality grading, certification and packaging.</p>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+
+<!-- ======================= SUPPLIERS ======================= -->
+<section class="section" id="suppliers">
+  <p class="eyebrow reveal">Sourcing network</p>
+  <h2 class="reveal">Manufacturers & distributors within reach</h2>
+  <p class="intro reveal">Verified regional producers to anchor the distribution-first phase — beginning with Hyderabad, then the Andhra and Maharashtra corridors.</p>
+
+  <div class="state-block reveal">
+    <h3><svg class="pin" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" fill="#52B788"/><circle cx="12" cy="10" r="2.6" fill="#F7F3E9"/></svg>Telangana</h3>
+    <div class="sup-grid">
+      <div class="sup"><h4>KRR Leaf Plates</h4><div class="role">Wholesaler / Distributor — Areca & Sal</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#1B4332" stroke-width="2"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/></svg>Sudheer Reddy Kancharla (Proprietor)</p>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>1st Floor, 9-17/A, Madura Nagar, Phase-II, Almasguda, Hyderabad 500058</p></div>
+      <div class="sup"><h4>Halo Leaf Plates</h4><div class="role">Manufacturer — Hand-stitched Siali plates & bowls</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21C7 17.5 4 13.6 4 9.5 4 5.9 7 3 12 3s8 2.9 8 6.5c0 4.1-3 8-8 11.5Z" stroke="#1B4332" stroke-width="2"/></svg>100% natural Siali leaf; works with rural artisans</p>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>Lot No. 3, Sai Gardners Colony, Saheb Nagar Kalan, Vanasthalipuram, Hyderabad 500070</p></div>
+      <div class="sup"><h4>Natural Leaf Plates</h4><div class="role">Supplier — Siali & Bauhinia (Banyan) plates</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h12l2 5H4l2-5ZM4 8v13h16V8" stroke="#1B4332" stroke-width="2" stroke-linejoin="round"/></svg>Listed at ₹7–8 per piece via industry directories</p>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>Achampet, Mahbubnagar, Telangana</p></div>
+    </div>
+  </div>
+
+  <div class="state-block reveal">
+    <h3><svg class="pin" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" fill="#C98A5E"/><circle cx="12" cy="10" r="2.6" fill="#F7F3E9"/></svg>Andhra Pradesh</h3>
+    <div class="sup-grid">
+      <div class="sup tan"><h4>Hanuma Enterprises</h4><div class="role">Manufacturer & Exporter — Areca (10″–12″)</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#1B4332" stroke-width="2"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/></svg>Mr. Srinu</p>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>44-34-12/2, Nandagiri Nagar, Akkayyapalem, Visakhapatnam 530016</p></div>
+      <div class="sup tan"><h4>Haripriya Industries</h4><div class="role">Manufacturer — Round areca plates (6″–12″) & spoons</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#1B4332" stroke-width="2"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/></svg>Mrs. Hari Priya</p>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>Plot 98, Survey 517/A, APIIC Indl. Estate Gooty, Anantapur 515401</p></div>
+      <div class="sup tan"><h4>Srikari Export Import</h4><div class="role">Regional source — leafware</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>Guntur, Andhra Pradesh (via industry listings)</p></div>
+    </div>
+  </div>
+
+  <div class="state-block reveal">
+    <h3><svg class="pin" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" fill="#7E3322"/><circle cx="12" cy="10" r="2.6" fill="#F7F3E9"/></svg>Maharashtra</h3>
+    <div class="sup-grid">
+      <div class="sup earth"><h4>AreKonkan Eco-Products</h4><div class="role">Producer — Konkan areca palm leaf plates</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M6 3v6a6 6 0 0 0 12 0V3M8 21h8" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/></svg>+91 93229 84895 · markets premium leafware nationwide</p>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>Wakdai Nagar, Utekhol, Mangaon Taluka, Raigad 402104</p></div>
+      <div class="sup earth"><h4>Kiran Global Exports</h4><div class="role">Large-scale manufacturer/exporter — Areca 10″, 12″+</div>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M6 3v6a6 6 0 0 0 12 0V3M8 21h8" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/></svg>080-4809-1365 · Solapur is a noted areca-plate hub</p>
+        <p><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.2A7 7 0 1 0 5 9.8C5 14.9 12 21 12 21Z" stroke="#1B4332" stroke-width="2"/></svg>Solapur, Maharashtra 413004</p></div>
+    </div>
+  </div>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+<!-- ======================= STRATEGY MIND MAPS ======================= -->
+<section class="section" id="strategy">
+  <p class="eyebrow reveal">Strategy maps</p>
+  <h2 class="reveal">Two mind maps that run the business</h2>
+  <p class="intro reveal">The venture starts as a branded distributor and grows into a manufacturer. These living maps hold the whole plan.</p>
+
+  <div class="map-block reveal">
+    <h3>① Business Model</h3>
+    <p class="map-sub">How the brand sources, sells and eventually makes its own leafware.</p>
+    <span class="map-hint">✳ Tap any branch to expand or collapse it</span>
+    <div class="mm-viewport"><div id="mapBusiness"></div></div>
+  </div>
+
+  <div class="map-block reveal">
+    <h3>② Go-to-Market</h3>
+    <p class="map-sub">Who we sell to first, at what price, and where we expand next.</p>
+    <span class="map-hint">✳ Tap any branch to expand or collapse it</span>
+    <div class="mm-viewport"><div id="mapGTM"></div></div>
+  </div>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+
+<!-- ======================= COMPLIANCE ======================= -->
+<section class="section" id="compliance">
+  <p class="eyebrow reveal">Getting certified</p>
+  <h2 class="reveal">The compliance roadmap</h2>
+  <p class="intro reveal">Food-contact safety and honest eco-claims are the licence to operate. Click each step for the detail.</p>
+  <div class="steps reveal" id="complianceSteps">
+    <div class="step" data-step="0">
+      <span class="s-order">1</span>
+      <div class="s-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6l-8-3Z" stroke="#1B4332" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="#52B788" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h4>FSSAI Licence</h4><div class="s-sub">Food-contact safety first</div>
+    </div>
+    <div class="step" data-step="1">
+      <span class="s-order">2</span>
+      <div class="s-ico"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#1B4332" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#52B788" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <h4>BIS IS 18267:2023</h4><div class="s-sub">The leafware quality standard</div>
+    </div>
+    <div class="step" data-step="2">
+      <span class="s-order">3</span>
+      <div class="s-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0 1 13.6-5.7M20 12a8 8 0 0 1-13.6 5.7" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/><path d="M17 3v4h-4M7 21v-4h4" stroke="#52B788" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h4>ISO 17088 Compost Cert</h4><div class="s-sub">Proof it returns to soil</div>
+    </div>
+    <div class="step" data-step="3">
+      <span class="s-order">4</span>
+      <div class="s-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v8M12 11 5 21h14L12 11Z" stroke="#1B4332" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="6" r="2.6" fill="#52B788"/></svg></div>
+      <h4>CPCB Claims</h4><div class="s-sub">"Biodegradable" — used legally</div>
+    </div>
+  </div>
+  <div class="step-detail reveal" id="stepDetail">
+    <h4 id="sdTitle"></h4><p id="sdBody"></p>
+  </div>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+
+<!-- ======================= PRICING ======================= -->
+<section class="section" id="pricing">
+  <p class="eyebrow reveal">Unit economics</p>
+  <h2 class="reveal">Where each material sits on the price ladder</h2>
+  <p class="intro reveal">Wholesale price bands per piece, plotted on a ₹0–40 scale. Leaf plates command a modest premium over coated paper while staying cost-competitive.</p>
+  <div class="ladder reveal">
+    <div class="rung"><div class="r-name">Coated paper <small>reference — contains plastic</small></div><div class="r-bar"><div class="r-fill" style="left:1.25%;width:11.25%;background:#B9B2A0"></div></div><div class="r-range">₹0.5–5</div></div>
+    <div class="rung"><div class="r-name">Sal / Siali <small>dry-food traditional</small></div><div class="r-bar"><div class="r-fill" style="left:2.5%;width:5%;background:#95B8A2"></div></div><div class="r-range">₹1–3</div></div>
+    <div class="rung"><div class="r-name">Bagasse <small>delivery workhorse</small></div><div class="r-bar"><div class="r-fill" style="left:5%;width:20%;background:#C98A5E"></div></div><div class="r-range">₹2–10</div></div>
+    <div class="rung"><div class="r-name">Areca palm <small>flagship — 6″ to 12″+</small></div><div class="r-bar"><div class="r-fill" style="left:5%;width:55%;background:#52B788"></div></div><div class="r-range">₹2–24</div></div>
+    <div class="rung"><div class="r-name">Bamboo fiber <small>luxury tier</small></div><div class="r-bar"><div class="r-fill" style="left:37.5%;width:62.5%;background:#1B4332"></div></div><div class="r-range">₹15–40</div></div>
+  </div>
+  <div class="price-callouts">
+    <div class="pc reveal"><b>Entry play</b>Match mid-tier competitors: launch the 10″ areca plate at ₹8–10 wholesale, ₹10–12 retail — with introductory discounts for first customers.</div>
+    <div class="pc reveal"><b>Volume buyers</b>Caterers and F&B chains expect volume discounts; street vendors and small canteens are price-sensitive — serve them with Sal and bagasse lines.</div>
+    <div class="pc reveal"><b>Premium tier</b>Event and catering clients tolerate higher prices for quality: extra-thick plates, custom logo printing, certified compostability.</div>
+    <div class="pc reveal"><b>Export upside</b>Export-quality plates fetch roughly 2× domestic prices — driven by quality grading, certification and packaging.</div>
+  </div>
+</section>
+<div class="divider"><svg viewBox="0 0 180 20"><path d="M5 10h60M115 10h60" stroke="#C98A5E" stroke-width="1.5" stroke-linecap="round"/><path d="M90 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7Z" fill="#52B788"/></svg></div>
+
+<!-- ======================= ROADMAP ======================= -->
+<section class="section" id="roadmap">
+  <p class="eyebrow reveal">First 12 months</p>
+  <h2 class="reveal">From first pallet to first plant</h2>
+  <p class="intro reveal">Distribution first, brand second, region third, manufacturing last — each phase funds the next.</p>
+  <div class="road">
+    <div class="phase reveal"><div class="ph-q">Months 1–3 · Distribution setup</div><h4>Source, certify, sample</h4>
+      <ul>
+        <li>Sign volume contracts with regional manufacturers (KRR, Halo, Hanuma, Haripriya…)</li>
+        <li>Apply for FSSAI licence; begin BIS IS 18267:2023 alignment</li>
+        <li>Build sample kits across 4″–12″ plates, bowls and spoons</li>
+        <li>Run first B2B pilots with Hyderabad caterers, hotels and temples</li>
+      </ul></div>
+    <div class="phase reveal"><div class="ph-q">Months 4–6 · Brand launch</div><h4>Green, clean and visible</h4>
+      <ul>
+        <li>Finalise brand identity — leaf-forward packaging, certificates on display</li>
+        <li>Launch website and social profiles with product photos and the sustainability story</li>
+        <li>Attend eco-friendly and catering expos; pitch hotel associations</li>
+        <li>Collect testimonials from local eco-enthusiasts and chefs; offer intro discounts</li>
+      </ul></div>
+    <div class="phase reveal"><div class="ph-q">Months 7–9 · Regional expansion</div><h4>Open the corridors</h4>
+      <ul>
+        <li>Set up logistics lanes: Hyderabad → Vijayawada, Pune, Bangalore</li>
+        <li>Stock Hyderabad wholesale markets; add custom logo-printing for large orders</li>
+        <li>List on e-commerce marketplaces; partner with organic stores and party-supply shops</li>
+        <li>Tie up with wellness events, eco-tourism resorts and green food festivals</li>
+      </ul></div>
+    <div class="phase reveal"><div class="ph-q">Months 10–12 · Scale & assess manufacturing</div><h4>Deeper roots</h4>
+      <ul>
+        <li>Enter Karnataka & Kerala — areca plate use is native to the Udupi belt</li>
+        <li>Complete ISO 17088 compostability certification and CPCB claim registration</li>
+        <li>Evaluate an in-house processing plant in Telangana's rural leaf belts</li>
+        <li>Apply Make-in-India green manufacturing incentives to lower capex</li>
+      </ul></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="fb">
+      <img src="leaf-logo.png" alt="Leaf. Logo" width="32" height="32" style="filter:brightness(0) invert(1);opacity:.8">
+      Leaf. · Leafware Venture
+    </div>
+    <div>Prepared from internal market research — Hyderabad, 2026 · Sources: industry reports, manufacturer catalogs, BIS & FSSAI guidelines</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------- Floating navigation on scroll ---------- */
+(function(){
+  const nav = document.querySelector('.nav');
+  if(!nav) return;
+  const checkScroll = () => {
+    if (window.scrollY > 15) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', checkScroll);
+  checkScroll();
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+  const io=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  els.forEach(e=>io.observe(e));
+})();
+
+/* ---------- Animated counters ---------- */
+(function(){
+  const nums=document.querySelectorAll('[data-count]');
+  const io=new IntersectionObserver(en=>{en.forEach(e=>{
+    if(!e.isIntersecting)return;io.unobserve(e.target);
+    const el=e.target,target=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||'0');
+    const t0=performance.now(),dur=1400;
+    (function tick(t){const p=Math.min((t-t0)/dur,1),ease=1-Math.pow(1-p,3);
+      el.textContent=(target*ease).toFixed(dec);
+      if(p<1)requestAnimationFrame(tick);})(t0);
+  })},{threshold:.5});
+  nums.forEach(n=>io.observe(n));
+})();
+
+/* ---------- Ghibli-Style Leaf Drift & Wind Curves Simulation ---------- */
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+
+  const canvas = document.getElementById('heroGL');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if(!ctx) return;
+
+  const LEAF_COLORS = [
+    [44, 74, 62],
+    [53, 92, 76],
+    [71, 112, 93],
+    [93, 133, 111],
+    [122, 152, 129]
+  ];
+  const BRONZE = [143, 133, 95];
+  const STREAK_RGB = "149, 184, 162"; // Brand sage color
+
+  const rgba = (rgb, mul, a) => {
+    return `rgba(${Math.round(rgb[0]*mul)}, ${Math.round(rgb[1]*mul)}, ${Math.round(rgb[2]*mul)}, ${a})`;
+  };
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let w = 0;
+  let h = 0;
+  let raf = 0;
+  let last = performance.now();
+  let t = 0;
+
+  const leaves = [];
+  let streaks = [];
+
+  let nextGust = 1.5 + Math.random() * 1.5;
+  let gustStart = -100;
+  let gustDur = 1;
+
+  const makeLeaf = () => {
+    const depth = 0.55 + Math.random() * 0.45;
+    const color = Math.random() < 0.1 ? BRONZE : LEAF_COLORS[Math.floor(Math.random() * LEAF_COLORS.length)];
+    const alpha = (0.45 + Math.random() * 0.35) * depth;
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      size: 21 + Math.random() * 18,
+      depth,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 1.6,
+      flutterPhase: Math.random() * Math.PI * 2,
+      flutterSpeed: 1.2 + Math.random() * 1.6,
+      swayPhase: Math.random() * Math.PI * 2,
+      swaySpeed: 0.4 + Math.random() * 0.7,
+      swayAmp: 8 + Math.random() * 10,
+      vx: 16 + Math.random() * 26,
+      vy: 5 + Math.random() * 9,
+      fillFront: rgba(color, 1, alpha),
+      fillBack: rgba(color, 0.8, alpha),
+      vein: `rgba(255, 255, 255, ${(0.4 * alpha).toFixed(3)})`,
+    };
+  };
+
+  const syncLeafCount = () => {
+    // Calm & sparse count: 9 on mobile, up to 18 on desktop
+    const target = Math.round(Math.min(18, Math.max(9, w / 85)));
+    while (leaves.length < target) leaves.push(makeLeaf());
+    if (leaves.length > target) leaves.length = target;
+  };
+
+  const resize = () => {
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    syncLeafCount();
+  };
+
+  const makeStreak = (born) => {
+    const n = 150;
+    const pts = [];
+    const step = (w * (0.55 + Math.random() * 0.4) + 160) / n;
+    let x = -80;
+    let y = h * (0.12 + Math.random() * 0.6);
+    let heading = (Math.random() - 0.5) * 0.2;
+    const wobAmp = 0.02 + Math.random() * 0.03;
+    const wobFreq = 0.06 + Math.random() * 0.05;
+    const phase = Math.random() * Math.PI * 2;
+    const hasCurl = Math.random() < 0.65;
+    const curlStart = Math.floor(n * (0.35 + Math.random() * 0.3));
+    const curlLen = 16 + Math.floor(Math.random() * 8);
+    const curlDir = Math.random() < 0.5 ? 1 : -1;
+    for (let i = 0; i < n; i++) {
+      pts.push({ x, y });
+      heading += Math.sin(i * wobFreq + phase) * wobAmp;
+      if (hasCurl && i >= curlStart && i < curlStart + curlLen) {
+        heading += (curlDir * Math.PI * 2) / curlLen;
+      }
+      heading *= 0.995;
+      x += Math.cos(heading) * step;
+      y += Math.sin(heading) * step;
+    }
+    return { pts, born, dur: 4.2 + Math.random() * 1.6 };
+  };
+
+  const drawStreak = (s) => {
+    const age = (t - s.born) / s.dur;
+    if (age < 0 || age > 1) return;
+    const env = Math.min(age / 0.15, 1, (1 - age) / 0.15);
+    const tailLen = 0.38;
+    const head = age * (1 + tailLen);
+    const tail = head - tailLen;
+    const n = s.pts.length;
+    const i0 = Math.max(0, Math.floor(tail * n));
+    const i1 = Math.min(n - 1, Math.ceil(head * n));
+    if (i1 - i0 < 2) return;
+    ctx.lineCap = "round";
+    for (let echo = 0; echo < 2; echo++) {
+      const off = echo * 9;
+      const trim = echo * Math.floor((i1 - i0) * 0.16);
+      for (let i = i0 + trim; i < i1 - trim; i++) {
+        const u = (i - i0) / (i1 - i0);
+        const fade = Math.sin(Math.PI * u);
+        ctx.strokeStyle = `rgba(${STREAK_RGB}, ${(
+          0.75 * fade * env * (echo ? 0.45 : 1)
+        ).toFixed(3)})`;
+        ctx.lineWidth = (0.7 + fade) * (echo ? 0.7 : 1);
+        ctx.beginPath();
+        ctx.moveTo(s.pts[i].x, s.pts[i].y + off);
+        ctx.lineTo(s.pts[i + 1].x, s.pts[i + 1].y + off);
+        ctx.stroke();
+      }
+    }
+  };
+
+  const updateLeaf = (leaf, dt, gust) => {
+    leaf.flutterPhase += dt * leaf.flutterSpeed * (1 + gust * 1.4);
+    leaf.swayPhase += dt * leaf.swaySpeed;
+    leaf.angle += dt * leaf.spin * (1 + gust * 1.2);
+    // Leaves drift left-to-right
+    leaf.x += (leaf.vx * leaf.depth + gust * 60 * leaf.depth) * dt;
+    leaf.y += (leaf.vy * leaf.depth + Math.sin(leaf.swayPhase) * leaf.swayAmp - gust * 14 * leaf.depth) * dt;
+    const m = 40;
+    if (leaf.x > w + m) {
+      leaf.x = -m;
+      leaf.y = Math.random() * h;
+    }
+    if (leaf.y > h + m) {
+      leaf.y = -m;
+      leaf.x = Math.random() * w;
+    } else if (leaf.y < -m * 1.5) {
+      leaf.y = h + m * 0.5;
+    }
+  };
+
+  const drawLeaf = (leaf) => {
+    const flip = Math.sin(leaf.flutterPhase);
+    const L = leaf.size * leaf.depth;
+    ctx.save();
+    ctx.translate(leaf.x, leaf.y);
+    ctx.rotate(leaf.angle);
+    ctx.scale(1, Math.max(Math.abs(flip), 0.18));
+    ctx.fillStyle = flip < 0 ? leaf.fillBack : leaf.fillFront;
+    ctx.beginPath();
+    ctx.moveTo(-L / 2, 0);
+    ctx.quadraticCurveTo(0, L * 0.46, L / 2, 0);
+    ctx.quadraticCurveTo(0, -L * 0.46, -L / 2, 0);
+    ctx.fill();
+    if (L > 8.5) {
+      ctx.strokeStyle = leaf.vein;
+      ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      ctx.moveTo(-L * 0.38, 0);
+      ctx.lineTo(L * 0.38, 0);
+      ctx.stroke();
+    }
+    ctx.restore();
+  };
+
+  const frame = (now) => {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    t += dt;
+
+    if (t >= nextGust) {
+      gustStart = t;
+      gustDur = 4.5 + Math.random() * 1.5;
+      streaks.push(makeStreak(t));
+      if (Math.random() < 0.65) {
+        streaks.push(makeStreak(t + 0.5 + Math.random() * 0.9));
+      }
+      nextGust = t + gustDur + 4 + Math.random() * 6;
+    }
+    const ga = (t - gustStart) / gustDur;
+    const gust = ga >= 0 && ga <= 1 ? Math.sin(Math.PI * ga) : 0;
+
+    ctx.clearRect(0, 0, w, h);
+    streaks = streaks.filter((s) => t - s.born <= s.dur);
+    for (const s of streaks) drawStreak(s);
+    for (const leaf of leaves) {
+      updateLeaf(leaf, dt, gust);
+      drawLeaf(leaf);
+    }
+  };
+
+  const onVisibility = () => {
+    cancelAnimationFrame(raf);
+    if (!document.hidden) {
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    }
+  };
+
+  resize();
+  raf = requestAnimationFrame(frame);
+  window.addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", onVisibility);
+})();
+
+/* ---------- Product cards expand ---------- */
+document.querySelectorAll('.pcard').forEach(c=>{
+  const toggle=()=>c.classList.toggle('open');
+  c.addEventListener('click',toggle);
+  c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+});
+
+/* ---------- Comparison table: column highlight ---------- */
+(function(){
+  const table=document.getElementById('cmpTable');if(!table)return;
+  table.addEventListener('mouseover',e=>{
+    const cell=e.target.closest('td,th');if(!cell||cell.cellIndex===0)return;
+    highlight(cell.cellIndex);
+  });
+  table.addEventListener('mouseleave',()=>highlight(-1));
+  function highlight(idx){
+    table.querySelectorAll('tr').forEach(r=>{
+      [...r.cells].forEach((c,i)=>c.classList.toggle('hl',i===idx&&i>0));
+    });
+  }
+})();
+
+/* ---------- Compliance steps ---------- */
+(function(){
+  const info=[
+    {t:'FSSAI Licence — food-contact safety',b:'All leaf tableware must meet food-contact safety standards. An FSSAI licence/certificate confirms the plates meet hygiene and food-safety criteria — and is often required for export too. Obtain it early and display it in marketing.'},
+    {t:'BIS IS 18267:2023 — the leafware standard',b:'The BIS specification for "Food Serving Utensils Made from Agri By-Products" explicitly covers leaf and plant-based plates. It mandates naturally sourced leaves (no damaging harvest), zero chemicals or resins, smooth edges, and defined quality requirements.'},
+    {t:'ISO 17088 — certified compostability',b:'Eco-certifications such as compostability certificates under ISO 17088 build buyer trust, especially with premium hospitality clients and export markets. Pair with relevant ISO quality standards where practical.'},
+    {t:'CPCB — using "biodegradable" legally',b:'Environmental claims like "biodegradable" may require CPCB (Central Pollution Control Board) certification under Indian rules for plastic alternatives. Any coating used must be food-grade — in practice, the best leaf plates use no added plastic at all.'}
+  ];
+  const steps=document.querySelectorAll('#complianceSteps .step');
+  const panel=document.getElementById('stepDetail'),tt=document.getElementById('sdTitle'),bb=document.getElementById('sdBody');
+  let openIdx=-1;
+  steps.forEach(s=>s.addEventListener('click',()=>{
+    const i=+s.dataset.step;
+    if(openIdx===i){openIdx=-1;panel.classList.remove('open');steps.forEach(x=>x.classList.remove('active'));return;}
+    openIdx=i;tt.textContent=info[i].t;bb.textContent=info[i].b;
+    panel.classList.add('open');
+    steps.forEach((x,xi)=>x.classList.toggle('active',xi===i));
+  }));
+})();
+
+/* ---------- Mind map engine ---------- */
+function createMindMap(hostId,data,palette){
+  const host=document.getElementById(hostId);if(!host)return;
+  const NS='http://www.w3.org/2000/svg';
+  const state=data.children.map((_,i)=>i<2); // first two branches open by default
+  function mkNode(text,cls,color){
+    const d=document.createElement('div');
+    d.className='mm-node '+cls;d.textContent=text;
+    if(color){
+      if(cls==='mm-branch'){d.style.borderColor=color;}
+      if(cls==='mm-leaf'){d.style.borderLeft='3px solid '+color;}
+    }
+    return d;
+  }
+  function link(svg,x1,y1,x2,y2,color){
+    const p=document.createElementNS(NS,'path');
+    const dx=(x2-x1)*0.5;
+    p.setAttribute('d','M'+x1+' '+y1+' C '+(x1+dx)+' '+y1+', '+(x2-dx)+' '+y2+', '+x2+' '+y2);
+    p.setAttribute('stroke',color);p.setAttribute('stroke-width','2.2');
+    p.setAttribute('fill','none');p.setAttribute('opacity','.6');p.setAttribute('stroke-linecap','round');
+    svg.appendChild(p);
+  }
+  function render(){
+    host.innerHTML='';
+    const W=1080,gapY=13,gapBlock=26,xGap=62,kidGapX=46;
+    const wrap=document.createElement('div');wrap.className='mm-stage';wrap.style.width=W+'px';
+    host.appendChild(wrap);
+    const svg=document.createElementNS(NS,'svg');svg.classList.add('mm-links');wrap.appendChild(svg);
+    const rootNode=mkNode(data.label,'mm-root',null);wrap.appendChild(rootNode);
+    const branches=data.children.map((b,i)=>{
+      const color=palette[i%palette.length];
+      const el=mkNode(b.label,'mm-branch',color);
+      const tog=document.createElement('span');tog.className='mm-tog';
+      tog.style.background=color;tog.textContent=state[i]?'−':'+';
+      el.appendChild(tog);
+      el.addEventListener('click',()=>{state[i]=!state[i];render();});
+      wrap.appendChild(el);
+      let kids=[];
+      if(state[i])kids=b.children.map(t=>{const k=mkNode(t,'mm-leaf',color);wrap.appendChild(k);return k;});
+      return {el,kids,color};
+    });
+    // measure blocks
+    branches.forEach(br=>{
+      const kh=br.kids.reduce((s,k)=>s+k.offsetHeight,0)+Math.max(0,br.kids.length-1)*gapY;
+      br.block=Math.max(br.el.offsetHeight,kh);
+    });
+    const n=branches.length,rightCount=Math.ceil(n/2);
+    const right=branches.slice(0,rightCount),left=branches.slice(rightCount);
+    const sideH=list=>list.reduce((s,b)=>s+b.block,0)+Math.max(0,list.length-1)*gapBlock;
+    const H=Math.max(sideH(right),sideH(left),240)+70;
+    wrap.style.height=H+'px';
+    svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    const cx=W/2,cy=H/2,rw=rootNode.offsetWidth,rh=rootNode.offsetHeight;
+    rootNode.style.left=(cx-rw/2)+'px';rootNode.style.top=(cy-rh/2)+'px';
+    function layoutSide(list,dir){
+      let y=(H-sideH(list))/2;
+      list.forEach(br=>{
+        const bw=br.el.offsetWidth,bh=br.el.offsetHeight;
+        const bx=dir===1?cx+rw/2+xGap:cx-rw/2-xGap-bw;
+        const bcy=y+br.block/2;
+        br.el.style.left=bx+'px';br.el.style.top=(bcy-bh/2)+'px';
+        link(svg,cx+dir*(rw/2-6),cy,dir===1?bx:bx+bw,bcy,br.color);
+        if(br.kids.length){
+          const kh=br.kids.reduce((s,k)=>s+k.offsetHeight,0)+(br.kids.length-1)*gapY;
+          let ky=bcy-kh/2;
+          br.kids.forEach(k=>{
+            const kw=k.offsetWidth;
+            const kx=dir===1?bx+bw+kidGapX:bx-kidGapX-kw;
+            k.style.left=kx+'px';k.style.top=ky+'px';
+            link(svg,dir===1?bx+bw:bx,bcy,dir===1?kx:kx+kw,ky+k.offsetHeight/2,br.color);
+            ky+=k.offsetHeight+gapY;
+          });
+        }
+        y+=br.block+gapBlock;
+      });
+    }
+    layoutSide(right,1);layoutSide(left,-1);
+  }
+  render();
+}
+
+const PALETTE=['#52B788','#C98A5E','#1B4332','#7E3322','#95B8A2','#8A9A5B'];
+
+function initMaps(){
+createMindMap('mapBusiness',{
+  label:'Leaf. — Tableware Brand',
+  children:[
+    {label:'Sourcing',children:['Partner manufacturers in TS · AP · MH','Volume contracts + sample QC','Full range: 4″–12″ plates, bowls, spoons','Multi-material: areca · sal · bagasse · bamboo']},
+    {label:'Branding',children:['"Green & clean" identity with leaf imagery','Certificates displayed on packaging','Website + social with sustainability story','Chef & eco-enthusiast testimonials']},
+    {label:'B2B Channels',children:['Caterers & event planners','Hotels, resorts & restaurants','Temples & religious festivals','Custom logo printing for large orders']},
+    {label:'B2C Channels',children:['Organic & health food stores','Party supply shops','E-commerce marketplaces','Eco-friendly party planning trend']},
+    {label:'Certifications',children:['FSSAI food-safety licence','BIS IS 18267:2023 standard','ISO 17088 compostability','CPCB "biodegradable" claims']},
+    {label:'Manufacturing (long-term)',children:['In-house or contract processing','Telangana rural leaf belts','Make-in-India green incentives','Custom shapes & thicker plates']}
+  ]
+},PALETTE);
+
+createMindMap('mapGTM',{
+  label:'Go-to-Market',
+  children:[
+    {label:'Target Segments',children:['Premium: weddings, hotels, resorts','Mid: restaurants & office canteens','Volume: street vendors (price-sensitive)','Institutional: temples & festivals']},
+    {label:'Pricing Tiers',children:['Entry: 10″ areca at ₹8–10 wholesale','Retail: ₹10–12 per premium plate','Volume discounts for bulk buyers','Export grade: ~2× domestic price']},
+    {label:'Promotions',children:['Wellness & eco-tourism tie-ups','Live compostability demonstrations','Trade fairs & catering expos','Intro discounts for first customers']},
+    {label:'Expansion Path',children:['Phase 1: Hyderabad + Telangana','Phase 2: AP & Maharashtra corridors','Phase 3: Karnataka & Kerala (Udupi belt)','Phase 4: major metros via e-tail']}
+  ]
+},PALETTE);
+}
+
+initMaps();
+/* Re-render once web fonts load so node heights are measured with the final typeface */
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(initMaps);}
+
+/* ---------- v2: 3D tilt on product cards ---------- */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('.pcard').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width-0.5;
+      const py=(e.clientY-r.top)/r.height-0.5;
+      card.style.transform='translateY(-4px) rotateX('+(-py*6).toFixed(2)+'deg) rotateY('+(px*7).toFixed(2)+'deg)';
+    });
+    card.addEventListener('pointerleave',()=>{card.style.transform='';});
+  });
+})();
+
+/* ---------- v2: field-guide lightbox ---------- */
+(function(){
+  const lb=document.createElement('div');lb.className='lightbox';
+  const im=document.createElement('img');lb.appendChild(im);
+  document.body.appendChild(lb);
+  document.querySelectorAll('.guide img').forEach(g=>{
+    g.parentElement.addEventListener('click',()=>{im.src=g.src;im.alt=g.alt;lb.classList.add('open');});
+  });
+  lb.addEventListener('click',()=>lb.classList.remove('open'));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open');});
+})();
+</script>
+</body>
+</html>
